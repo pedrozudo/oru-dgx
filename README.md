@@ -14,7 +14,7 @@ As of now, you have to contact the account manager of the Data Factory and the D
 ### 2. Setting Up Docker and Dockerhub
 Your code on the DGX Machine will be running in Docker containers. It is a good idea to install the [docker-engine](https://docs.docker.com/engine/install/) on your local machine. It is also a good idea to additionally perform the [post-installation](https://docs.docker.com/engine/install/linux-postinstall/) when your local machine runs Linux. Do also create an account on [Dockerhub](https://hub.docker.com/). This allows you to build customg docker images upload to Dockerhub and deploy them on the DGX Machine.
 
-## Development Workflow
+## Workflow
 
 ### 1. Build and Push Docker Image
 
@@ -57,7 +57,7 @@ Replace in the command above `username` with your oru.se username. The password 
 
 You can now use the mounted the directory to put your code and your data that you would like to use when working on new research.
 
-### 3. Running Your Code on the DGX Machine
+### 3. Running Code on the DGX Machine
  Let's assume you have some code and data in the `~/mount/datafactory/AGI` directroy and you want to run your algorithm on the DGX Machine now. Here is what you have to to.
 
  1. Go to [horizon.oru.se](horizon.oru.se) and look for `oru.aiqu.se` and login. You will end up in a dashboard looking like this:
