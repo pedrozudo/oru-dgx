@@ -49,7 +49,7 @@ Next you will want to mount your home directory on the Data Factory on to your l
 ```sh
 mkdir -p ~/mount/datafactory
 ```
-Now you can simply use the following command to mount the remote directory onto your local machine. Note that you need to be on the oru.se network for this (either physically or via VPN)
+Now you can simply use the following command to mount the remote directory onto your local machine. Note that you need to be on the oru.se network for this (either physically or via VPN).
 ```sh
 sshfs username@10.1.115.65:/mnt/dgx_001/aiqu_data/users/username/ ~/mount/datafactory
 ```
