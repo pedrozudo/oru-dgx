@@ -60,7 +60,7 @@ You can now use the mounted directory to transfer your prototype code and data t
 ### 3. Running Code on the DGX Machine
  Let's assume you have some code and data in the `~/mount/datafactory/AGI` directroy and you want to run your algorithm on the DGX Machine now. Here is what you have to to.
 
- 1. Go to [horizon.oru.se](horizon.oru.se), look for `oru.aiqu.se` and login. You will end up in a dashboard looking like this:
+ 1. Go to [horizon.oru.se](https://horizon.oru.se/portal/webclient/#/launchitems), look for `oru.aiqu.se` and login. You will end up in a dashboard looking like this:
  ![image](images/dashboard.png)
  2. Click on the `Jobs` tab on the left and populate the following fields:
     - Job Label: just enter the name you want your job to have
