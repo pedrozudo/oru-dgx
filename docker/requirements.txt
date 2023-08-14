@@ -1,4 +1,4 @@
-torch==1.13.0
-torchvision==0.14.0
-torchaudio==0.13.0
-tensorboard==2.11.0
+torch==2.0.1
+torchaudio==2.0.2
+torchmetrics==1.0.1
+torchvision==0.15.2

@@ -9,7 +9,7 @@ For the interested reader there is also a [user guide](./userguide_oru_dgx.pdf) 
 
 ### 1. Getting an Account for the Data Factory and the DGX Machine
 
-As of now, you have to contact the account manager of the Data Factory and the DGX Machine, Currently, this is [Andreas Persson](mailto:andreas.persson@oru.se) (25/11/2022). Write him a mail, he will fix you an account.
+As of now, you have to contact the account manager of the Data Factory and the DGX Machine, Currently, this is [Andreas Persson](mailto:andreas.persson@oru.se) (14/08/2023). Write him a mail, he will fix you an account.
 
 ### 2. Setting Up Docker and Dockerhub
 Your code on the DGX Machine will be running in Docker containers. It is a good idea to install the [docker-engine](https://docs.docker.com/engine/install/) on your local machine. It is also a good idea to additionally perform the [post-installation](https://docs.docker.com/engine/install/linux-postinstall/) when your local machine runs Linux. Do also create an account on [Dockerhub](https://hub.docker.com/). This allows you to build custom docker images upload them to Dockerhub and deploy them on the DGX Machine.
@@ -57,6 +57,8 @@ Replace in the command above `username` with your oru.se username. The password 
 
 You can now use the mounted directory to transfer your prototype code and data to the Data Factory from your local machine.
 
+Note: if you have never logged in to the Data Factory, your personal directory does not exist yet. In this case you will first have to login using the webinterface. The steps are described in the next section. 
+
 ### 3. Running Code on the DGX Machine
  Let's assume you have some code and data in the `~/mount/datafactory/AGI` directroy and you want to run your algorithm on the DGX Machine now. Here is what you have to to.
 
@@ -64,7 +66,7 @@ You can now use the mounted directory to transfer your prototype code and data t
  ![image](images/dashboard.png)
  2. Click on the `Jobs` tab on the left and populate the following fields:
     - Job Label: just enter the name you want your job to have
-    - Image: enter the docker image (on Dockerhub) you want to use, for instance, `pedrozudo/oru-dgx:torch-1.13.0`
+    - Image: enter the docker image (on Dockerhub) you want to use, for instance, `pedrozudo/oru-dgx:torch-2.0.1`
 
     Also adjust the number of GPUs you need and for how long (in minutes) you want your job to be running. You can also expose ports (see the [user guide](./userguide_oru_dgx.pdf) for further details on this).
 
