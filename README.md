@@ -60,7 +60,7 @@ You can now use the mounted directory to transfer your prototype code and data t
 Note: if you have never logged in to the Data Factory, your personal directory does not exist yet. In this case you will first have to login using the webinterface. The steps are described in the next section. 
 
 ### 3. Running Code on the DGX Machine
- Let's assume you have some code and data in the `~/mount/datafactory/AGI` directroy and you want to run your algorithm on the DGX Machine now. Here is what you have to to.
+ Let's assume you have some code and data in the `~/mount/datafactory/AGI` directory and you want to run your algorithm on the DGX Machine now. Here is what you have to to.
 
  1. Go to [horizon.oru.se](https://horizon.oru.se/portal/webclient/#/launchitems), look for `oru.aiqu.se` and login. You will end up in a dashboard looking like this:
  ![image](images/dashboard.png)
@@ -74,7 +74,7 @@ Note: if you have never logged in to the Data Factory, your personal directory d
 
     You are now good to go. Click on `Queue Job` and wait for your job to be scheduled.
 
-    Once this happens, open a terminal for your job (on the far right in the job list). List the files and directories (`ls`). Your project should now be in the `AGI` directroy. You can cd into it and run your algorithm
+    Once this happens, open a terminal for your job (on the far right in the job list). List the files and directories (`ls`). Your project should now be in the `AGI` directory. You can cd into it and run your algorithm
     ```sh
     cd AGI
     python agi.py
