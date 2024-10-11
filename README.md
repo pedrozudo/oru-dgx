@@ -53,7 +53,10 @@ Now you can simply use the following command to mount the remote directory onto 
 ```sh
 sshfs username@10.1.115.65:/mnt/dgx_001/aiqu_data/users/username/ ~/mount/datafactory
 ```
-Replace in the command above `username` with your oru.se username. The password will also be your oru.se password,
+Replace in the command above `username` with your oru.se username. The password will also be your oru.se password. You can verify whether the mount was successful by running `mount | grep sshfs` which should produce:
+```
+username@10.1.115.65:/mnt/dgx_001/aiqu_data/users/username/ on /mount/datafactory type fuse.sshfs (rw,nosuid,nodev,relatime,user_id=1000,group_id=1000)
+```
 
 You can now use the mounted directory to transfer your prototype code and data to the Data Factory from your local machine.
 
