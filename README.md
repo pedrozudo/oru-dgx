@@ -30,7 +30,7 @@ Here are the general steps to follow:
 
 2. Adapt the `build.sh` and the `push.sh` files by setting the variables.
 
-3. Adapt the `Dockerfile` file and the `requirements.txt` file.
+3. Adapt the `Dockerfile` file and the `requirements.txt` file. (Optional: you can choose to install `tmux` in your docker image, reason and instructions have been described in section [Using `tmux`](#using-tmux))
 
 4. Build the image:
 ```sh
@@ -84,3 +84,44 @@ Note: if you have never logged in to the Data Factory, your personal directory d
     ```
 
 3. You will probably have a bug or two in your code which you would like to fix. On your local machine, go to the `~/mount/datafactory/AGI/` directory and fix your bug. The cool thing is that both the `~/mount/datafactory/AGI/` directory on your local machine and the `/AGI/` directory on the DGX Machine were mounted from the same directory on the Data Factory. This means that changing a file on your local machine will be reflected within the running docker image on the DGX machine. You can now code away on the DGX Machine while using the comfort of your local setup.
+
+
+## Using `tmux`
+### Why?
+The [horizon.oru.se](https://horizon.oru.se/portal/webclient/#/launchitems) interface allows opening a terminal for your job, but if that terminal is closed (accidentally, on purpose, or due to logout) the logs are lost and you can't "reconnect" to the previously open terminal. A workaround is to run your job inside a `tmux` _session_; even if the terminal is closed the `tmux` session lives on which you can _attach_ to. Head over to the [official tmux documentation](https://github.com/tmux/tmux/wiki) to learn more.
+
+A neat `tmux` feature — it's after all a [terminal multiplexer](https://en.wikipedia.org/wiki/Terminal_multiplexer) — is that you can stack several terminals and switch between them through keyboard shortcuts, thus letting you have multiple terminals open at the same time. In `tmux` parlance, each terminal is a _window_ and multiple windows comprise a _session_. 
+### How?
+This section is a primer on how to get started with `tmux`. If there is any difference between what's here and the official documentation, the latter is correct (in which case please consider opening a PR with the correction).
+
+#### How to install?
+Installation via `apt` is the recommended way:
+```
+sudo apt update && sudo apt install tmux
+```
+
+In your `Dockerfile`, if you are already installing packages through `apt`, simply throw in `tmux` and it will get installed in your docker image.
+
+#### How to use?
+Right when your docker image is spun up as a container on the DGX (i.e. right when your job starts), say you want a `tmux` session named `mysession` to start with three windows: **1)** `htop`, **2)** `watch -n1 nvidia-smi`, **3)** a regular terminal for you to do what you like. (It's possible to add more windows to an existing session)
+
+Place the following command at the end your `Dockerfile` (make sure this is not overriden elsewhere):
+```
+CMD tmux new-session -d -s mysession \; \
+    send-keys 'htop' C-m \; \
+    new-window -t mysession:1 \; \
+    rename-window 'nvidia-smi' \; \
+    send-keys 'watch -n1 nvidia-smi' C-m \; \
+    new-window -t mysession:2 \; \
+    send-keys '/bin/bash' C-m \; \
+    attach-session -t mysession
+```
+
+On [horizon.oru.se](https://horizon.oru.se/portal/webclient/#/launchitems), open up a terminal from your active job, and type `tmux ls`. This will list `mysession` as the session that is already running, which you can attach to with `tmux a`. To reiterate, the whole point of using `tmux` is that even if the terminal gets closed, the `tmux` session does not die so you can simply attach to the running session from a new terminal.
+
+All keyboard shortcuts for interacting with a `tmux` session _start_ with `Ctrl + B` followed by the keybinding for the specific operation. The three main keybindings to remember are (`Ctrl + B` comes before _every_ one):
+1. `W`: Brings up list of windows in the session. Use arrow keys to reach a window and hit `enter` to select it.
+2. `0-9`: Directly brings up the window matching the index number without requiring to go to the list of windows first.
+3. `[`: Activates scroll mode _inside a window_. Use up-down direction keys to scroll, and `Page Up/Down` to jump a page. Hit `q` to deactivate scroll mode.
+
+If you have made it this far, make sure to check out [Fireship: Tmux in 100 seconds](https://youtu.be/vtB1J_zCv8I).
