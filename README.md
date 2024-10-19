@@ -103,6 +103,8 @@ sudo apt update && sudo apt install tmux
 In your `Dockerfile`, if you are already installing packages through `apt`, simply throw in `tmux` and it will get installed in your docker image.
 
 #### How to use?
+(a good video to start with is [Fireship: Tmux in 100 seconds](https://youtu.be/vtB1J_zCv8I))
+
 Right when your docker image is spun up as a container on the DGX (i.e. right when your job starts), say you want a `tmux` session named `mysession` to start with three windows: **1)** `htop`, **2)** `watch -n1 nvidia-smi`, **3)** a regular terminal for you to do what you like. (It's possible to add more windows to an existing session)
 
 Place the following command at the end your `Dockerfile` (make sure this is not overriden elsewhere):
@@ -123,5 +125,3 @@ All keyboard shortcuts for interacting with a `tmux` session _start_ with `Ctrl 
 1. `W`: Brings up list of windows in the session. Use arrow keys to reach a window and hit `enter` to select it.
 2. `0-9`: Directly brings up the window matching the index number without requiring to go to the list of windows first.
 3. `[`: Activates scroll mode _inside a window_. Use up-down direction keys to scroll, and `Page Up/Down` to jump a page. Hit `q` to deactivate scroll mode.
-
-If you have made it this far, make sure to check out [Fireship: Tmux in 100 seconds](https://youtu.be/vtB1J_zCv8I).
