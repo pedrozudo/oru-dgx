@@ -107,7 +107,7 @@ In your `Dockerfile`, if you are already installing packages through `apt`, simp
 
 Right when your docker image is spun up as a container on the DGX (i.e. right when your job starts), say you want a `tmux` session named `mysession` to start with three windows: **1)** `htop`, **2)** `watch -n1 nvidia-smi`, **3)** a regular terminal for you to do what you like. (It's possible to add more windows to an existing session)
 
-Place the following command at the end your `Dockerfile` (make sure this is not overriden elsewhere):
+Place the following command at the end your `Dockerfile` (make sure this is not overridden elsewhere):
 ```
 CMD tmux new-session -d -s mysession \; \
     send-keys 'htop' C-m \; \
